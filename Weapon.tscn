@@ -1,3 +1,28 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.0862745, 0.054902, 0.054902, 1 )
+
+[sub_resource type="CubeMesh" id=1]
+material = SubResource( 3 )
+size = Vector3( 0.2, 0.5, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.0745098, 0.0588235, 0.0588235, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 4 )
+size = Vector3( 0.6, 0.2, 0.2 )
 
 [node name="WeaponName" type="Spatial"]
+
+[node name="Graphics" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Graphics"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.395866, 0.159022, 0 )
+mesh = SubResource( 2 )
+material/0 = null
