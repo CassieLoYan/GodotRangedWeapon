@@ -36,20 +36,24 @@ func _ready():
 	spread_timer.connect("timeout", self, "_reset_spread")
 	## SETS THE RAYCAST TO BE AT THE CENTER OF THE SCREEN ##
 	ray.global_transform.origin = cam.global_transform.origin
+	## SETS THE SHOOTING RANGE ##
 	ray.cast_to = Vector3(0,0,-shooting_range)
+	## MAKES THE RAY NOT COLLIDE WITH THE PLAYER ##
 	ray.add_exception(player)
 
 
 func _physics_process(delta):
+	## RELOADS THE WEAPON ##
 	if Input.is_action_just_pressed("reload"):
 		anim.play("Reload", -1, reload_speed)
-
 	else:
+		## SHOOTS ONCE EVERY TIME THE BUTTON IS CLICKED ##
 		if !automatic:
 			if Input.is_action_just_pressed("primary_fire"):
 				primary_fire()
 			if Input.is_action_just_pressed("secondary_fire"):
 				secondary_fire()
+		## SHOOTS WHILE THE BUTTON IS BEING HELD ##
 		else:
 			if Input.is_action_pressed("secondary_fire"):
 				secondary_fire()
@@ -59,33 +63,29 @@ func _physics_process(delta):
 
 func primary_fire():
 	if ammo > 0 and !(cooldown_timer.time_left > 0):
+		## ADDS SPREAD TO THE SHOT ##
 		_set_spread()
 		spread+=spread_per_shot
 		spread_timer.start(time_to_reset_spread)
+		## STARTS THE SHOOTING COOLDOWN ##
 		cooldown_timer.start(cooldown)
+		## PLAYS THE SHOOTING ANIMATION ##
 		anim.play("Shoot")
 		ammo -= ammo_per_shot
 		if ray.is_colliding():
-			print(ray.get_collider())
+			## DAMAGES WHAT THE PLAYER SHOT AT ##
 			if ray.get_collider().has_method("damage"):
-				ray.get_collider().damage(damage) 
-			spawn_bullet_decal(ray.get_collision_point(), ray.get_collision_normal(),ray.get_collider())
+				ray.get_collider().damage(damage, ray.get_collision_point(), ray.get_collision_normal()) 
+
 func secondary_fire():
 	pass
 
-func spawn_bullet_decal(point,normal,object):
-	var decal = Sprite3D.new()
-	decal.texture = bullet_decal
-	object.add_child(decal)
-	decal.global_transform.origin = point+(Vector3(0.1,0.1,0.1))
-	decal.look_at(normal, Vector3.UP)
-	decal.rotation_degrees.x+=90
-	decal.rotation_degrees.y+=90
-
+## RESETS THE WEAPON SPREAD WHENEVER THE SPREAD COOLDOWN IS UP ##
 func _reset_spread():
 	spread = 0
 	ray.cast_to = Vector3(0,0,-shooting_range)
 
+## CALLED AT SOME POINT IN THE RELOADING ANIMATION ##
 func _reload():
 	ammo = max_ammo
 
