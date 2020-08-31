@@ -12,7 +12,7 @@ albedo_color = Color( 0.0745098, 0.0588235, 0.0588235, 1 )
 
 [sub_resource type="CubeMesh" id=2]
 material = SubResource( 4 )
-size = Vector3( 0.6, 0.2, 0.2 )
+size = Vector3( 0.6, 0.15, 0.15 )
 
 [node name="WeaponName" type="Spatial"]
 

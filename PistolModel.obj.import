@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/PistolModel.obj-0418d2b38708224aba26e91eecc3af33.mesh"
+
+[deps]
+
+files=[ "res://.import/PistolModel.obj-0418d2b38708224aba26e91eecc3af33.mesh" ]
+
+source_file="res://Weapon/GodotRangedWeapon/PistolModel.obj"
+dest_files=[ "res://.import/PistolModel.obj-0418d2b38708224aba26e91eecc3af33.mesh", "res://.import/PistolModel.obj-0418d2b38708224aba26e91eecc3af33.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
