@@ -63,3 +63,5 @@ material/0 = SubResource( 1 )
 [node name="Add Your Animations" type="AnimationPlayer" parent="."]
 anims/Reload = SubResource( 2 )
 anims/Shoot = SubResource( 3 )
+
+[node name="RayCast" type="RayCast" parent="."]
