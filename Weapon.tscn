@@ -1,28 +1,35 @@
 [gd_scene load_steps=5 format=2]
 
-[sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.0862745, 0.054902, 0.054902, 1 )
+[ext_resource path="res://Weapon/GodotRangedWeapon/PistolModel.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Weapon/GodotRangedWeapon/PistolModel.png" type="Texture" id=2]
 
-[sub_resource type="CubeMesh" id=1]
-material = SubResource( 3 )
-size = Vector3( 0.2, 0.5, 0.2 )
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
 
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.0745098, 0.0588235, 0.0588235, 1 )
-
-[sub_resource type="CubeMesh" id=2]
-material = SubResource( 4 )
-size = Vector3( 0.6, 0.15, 0.15 )
+[sub_resource type="Animation" id=2]
+resource_name = "Reload"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Replace With Your Model:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 270 ), Vector3( 0, 0, 360 ) ]
+}
 
 [node name="WeaponName" type="Spatial"]
 
-[node name="Graphics" type="Spatial" parent="."]
+[node name="Replace With Your Model" type="Spatial" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="Graphics"]
-mesh = SubResource( 1 )
-material/0 = null
+[node name="MeshInstance" type="MeshInstance" parent="Replace With Your Model"]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )
 
-[node name="MeshInstance2" type="MeshInstance" parent="Graphics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.395866, 0.159022, 0 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Add Your Animations" type="AnimationPlayer" parent="."]
+anims/Reload = SubResource( 2 )
