@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Weapon/GodotRangedWeapon/PistolModel.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Weapon/GodotRangedWeapon/PistolModel.png" type="Texture" id=2]
 [ext_resource path="res://Weapon/GodotRangedWeapon/Weapon.gd" type="Script" id=3]
+[ext_resource path="res://Weapon/GodotRangedWeapon/BulletDecal.png" type="Texture" id=4]
+[ext_resource path="res://Weapon/GodotRangedWeapon/AimReticle.png" type="Texture" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 2 )
@@ -20,7 +22,21 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 270 ), Vector3( 0, 0, 360 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 90, 0, 0 ), Vector3( 180, 0, 0 ), Vector3( 270, 0, 0 ), Vector3( 360, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_reload"
+} ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -53,9 +69,16 @@ tracks/1/keys = {
 
 [node name="WeaponName" type="Spatial"]
 script = ExtResource( 3 )
-max_ammo = 8
-cooldown = 1.0
-reload_speed = 1.0
+max_ammo = 30
+ammo_per_shot = 1
+automatic = true
+cooldown = 0.1
+reload_speed = 5.0
+shooting_range = 10.0
+spread_per_shot = 0.1
+time_to_reset_spread = 2.0
+bullet_decal = ExtResource( 4 )
+aim_reticle = ExtResource( 5 )
 
 [node name="Replace With Your Model" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -72,3 +95,6 @@ anims/Shoot = SubResource( 3 )
 [node name="RayCast" type="RayCast" parent="."]
 enabled = true
 cast_to = Vector3( 0, 0, -50 )
+
+[node name="AimReticle" type="Sprite" parent="."]
+offset = Vector2( 512, 300 )
