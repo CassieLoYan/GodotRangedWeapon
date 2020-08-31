@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Weapon/GodotRangedWeapon/PistolModel.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Weapon/GodotRangedWeapon/PistolModel.png" type="Texture" id=2]
@@ -22,9 +22,38 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 90 ), Vector3( 0, 0, 180 ), Vector3( 0, 0, 270 ), Vector3( 0, 0, 360 ) ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "Shoot"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Replace With Your Model:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -15 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Replace With Your Model:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0.949787, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
 [node name="WeaponName" type="Spatial"]
 
 [node name="Replace With Your Model" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Replace With Your Model"]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0 )
@@ -33,3 +62,4 @@ material/0 = SubResource( 1 )
 
 [node name="Add Your Animations" type="AnimationPlayer" parent="."]
 anims/Reload = SubResource( 2 )
+anims/Shoot = SubResource( 3 )
